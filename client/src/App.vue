@@ -10,4 +10,5 @@ import BackgroundOverlay from "./components/BackgroundOverlay.vue";
     <BackgroundOverlay />
     <RouterView />
   </main>
+  <BottomNav />
 </template>
