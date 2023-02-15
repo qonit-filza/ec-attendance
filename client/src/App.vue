@@ -6,7 +6,7 @@ import BackgroundOverlay from "./components/BackgroundOverlay.vue";
 </script>
 
 <template>
-  <main>
+  <main class="m-7 text-white">
     <BackgroundOverlay />
     <RouterView />
   </main>
