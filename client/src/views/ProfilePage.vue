@@ -1,5 +1,6 @@
 <script setup>
 import TopBar from "../components/TopBar.vue";
+import CustomButton from "../components/CustomButton.vue";
 </script>
 
 <template>
@@ -15,34 +16,43 @@ import TopBar from "../components/TopBar.vue";
         alt="Rounded avatar"
       />
 
-      <div class="my-14 flex flex-col gap-5">
+      <div class="mt-14 mb-8 flex flex-col gap-5">
         <div>
-          <p class="text-xs">Name</p>
-          <p class="text-md font-semibold mt-1">John Doe</p>
+          <p class="text-md">Name</p>
+          <p class="text-xl font-semibold mt-1">John Doe</p>
         </div>
 
         <div>
-          <p class="text-xs">Job Title</p>
-          <p class="text-md font-semibold mt-1">Web Developer</p>
+          <p class="text-md">Job Title</p>
+          <p class="text-xl font-semibold mt-1">Web Developer</p>
         </div>
 
         <div>
-          <p class="text-xs">Email</p>
-          <p class="text-md font-semibold mt-1">johndoe@mail.com</p>
+          <p class="text-md">Email</p>
+          <p class="text-xl font-semibold mt-1">johndoe@mail.com</p>
         </div>
 
         <div>
-          <p class="text-xs">Phone</p>
-          <p class="text-md font-semibold mt-1">08123456789</p>
+          <p class="text-md">Phone</p>
+          <p class="text-xl font-semibold mt-1">08123456789</p>
         </div>
 
         <div>
-          <p class="text-xs">Address</p>
-          <p class="text-md font-semibold mt-1 w-full text-center px-16">
+          <p class="text-md">Address</p>
+          <p class="text-xl font-semibold mt-1 w-full text-center px-14">
             Jl Kebon Kacang no. 10, Jakarta Pusat
           </p>
         </div>
       </div>
     </div>
+
+    <CustomButton class="mt-5" buttonType="button" buttonText="Edit Profile" />
+
+    <CustomButton
+      class="mt-4"
+      buttonType="button"
+      buttonText="Log out"
+      buttonColor="#EB7878"
+    />
   </section>
 </template>

@@ -1,6 +1,7 @@
 <script setup>
 import IconEmail from "../components/icons/IconEmail.vue";
 import IconPassword from "../components/icons/IconPassword.vue";
+import CustomButton from "../components/CustomButton.vue";
 </script>
 
 <template>
