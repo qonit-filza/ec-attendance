@@ -1,7 +1,7 @@
 <script setup>
 import TopBar from "../components/TopBar.vue";
 import IconLocation from "../components/icons/IconLocation.vue";
-import BottomNav from "../components/BottomNav.vue";
+import DragSlide from "../components/DragSlide.vue";
 </script>
 
 <template>
@@ -18,7 +18,7 @@ import BottomNav from "../components/BottomNav.vue";
       </div>
     </div>
 
-    <div class="bg-white text-gray-700 text-center py-2 rounded-lg mt-28">
+    <div class="bg-white text-gray-700 text-center py-2 rounded-lg mt-56">
       <p class="text-xs">Your Working Hours</p>
       <p class="text-md font-semibold mt-1">09:00 - 18:00</p>
     </div>
@@ -39,5 +39,7 @@ import BottomNav from "../components/BottomNav.vue";
         <p class="text-2xl font-semibold mt-1">00:30</p>
       </div>
     </div>
+
+    <DragSlide class="mt-4" />
   </section>
 </template>
