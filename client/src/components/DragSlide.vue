@@ -27,7 +27,7 @@ export default {
     :width="400"
     :height="50"
     text="Slide to clock-in"
-    success-text="Your attendance has been recorded"
+    success-text="Good luck for today!"
     @completed="complete()"
   />
 </template>
