@@ -2,6 +2,7 @@
 import TopBar from "../components/TopBar.vue";
 import IconLocation from "../components/icons/IconLocation.vue";
 import DragSlide from "../components/DragSlide.vue";
+import DigitalClock from "../components/DigitalClock.vue";
 </script>
 
 <template>
@@ -10,7 +11,7 @@ import DragSlide from "../components/DragSlide.vue";
 
     <div class="mt-24 text-center flex flex-col gap-2">
       <p class="text-sm">Thusrsday, 16 February 2023</p>
-      <p class="text-6xl">09:10:30</p>
+      <DigitalClock />
 
       <div class="flex flex-row gap-1.5 mx-auto text-sm">
         <IconLocation class="my-auto" />

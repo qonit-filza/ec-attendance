@@ -7,7 +7,8 @@ export default {
   },
   methods: {
     complete() {
-      console.log("sukses");
+      const date = new Date();
+      console.log(date);
       setTimeout(() => {
         this.$refs.vueslideunlock.reset();
       }, 2000);
