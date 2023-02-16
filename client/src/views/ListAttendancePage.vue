@@ -19,8 +19,10 @@ export default {
   methods: {
     async fetchAttendanceList() {
       try {
+        const date = new Date();
+        const localeDate = date.toLocaleDateString();
         const { data } = await axios.get(
-          `http://localhost:3000/attendances?UserId=${userId}`
+          `http://localhost:3000/attendances?UserId=${userId}&date_ne=${localeDate}`
         );
         this.attendanceList = data;
         this.onTime = data.filter(
