@@ -10,7 +10,6 @@ import DigitalClock from "../components/DigitalClock.vue";
     <TopBar />
 
     <div class="mt-24 text-center flex flex-col gap-2">
-      <p class="text-sm">Thusrsday, 16 February 2023</p>
       <DigitalClock />
 
       <div class="flex flex-row gap-1.5 mx-auto text-sm">
