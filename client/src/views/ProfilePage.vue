@@ -3,6 +3,7 @@ import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import CustomButton from "../components/CustomButton.vue";
 import axios from "axios";
+import Swal from "sweetalert2";
 const userId = localStorage.getItem("userId");
 const router = useRouter();
 
@@ -44,8 +45,18 @@ async function handleEditProfile() {
 }
 
 function handleLogout() {
-  localStorage.clear();
-  router.push("login");
+  Swal.fire({
+    title: `Are you sure?`,
+    showCancelButton: true,
+    confirmButtonColor: "rgb(239 156 56)",
+    cancelButtonColor: "rgb(168 162 158)",
+    confirmButtonText: "Log out",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      localStorage.clear();
+      router.push("login");
+    }
+  });
 }
 </script>
 
