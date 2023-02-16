@@ -23,20 +23,113 @@
   ],
   "attendances": [
     {
-      "id": 1,
-      "date": "",
-      "clockIn": "",
-      "clockInLocation": "",
-      "clockOutLocation": "",
-      "clockOut": "",
-      "UserId": 1
-    },
-    {
       "date": "2/16/2023",
       "clockIn": "09:10:43",
       "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
       "UserId": 1,
-      "id": 2
+      "id": 16,
+      "clockOut": "15:20:31",
+      "clockOutLocation": "Jl. Tanah Kusir II Blok Haji Leman No.55, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia"
+    },
+    {
+      "date": "2/15/2023",
+      "clockIn": "08:20:15",
+      "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
+      "UserId": 1,
+      "id": 15,
+      "clockOut": "18:30:31",
+      "clockOutLocation": "Jl. Tanah Kusir II Blok Haji Leman No.55, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia"
+    },
+    {
+      "date": "2/14/2023",
+      "clockIn": "07:10:15",
+      "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
+      "UserId": 1,
+      "id": 14,
+      "clockOut": "18:10:31",
+      "clockOutLocation": "Jl. Tanah Kusir II Blok Haji Leman No.55, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia"
+    },
+    {
+      "date": "2/13/2023",
+      "clockIn": "09:10:15",
+      "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
+      "UserId": 1,
+      "id": 13,
+      "clockOut": "18:40:31",
+      "clockOutLocation": "Jl. Tanah Kusir II Blok Haji Leman No.55, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia"
+    },
+    {
+      "date": "2/10/2023",
+      "clockIn": "07:20:15",
+      "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
+      "UserId": 1,
+      "id": 10,
+      "clockOut": "18:30:31",
+      "clockOutLocation": "Jl. Tanah Kusir II Blok Haji Leman No.55, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia"
+    },
+    {
+      "date": "2/9/2023",
+      "clockIn": "08:22:15",
+      "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
+      "UserId": 1,
+      "id": 9,
+      "clockOut": "17:30:31",
+      "clockOutLocation": "Jl. Tanah Kusir II Blok Haji Leman No.55, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia"
+    },
+    {
+      "date": "2/8/2023",
+      "clockIn": "08:20:15",
+      "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
+      "UserId": 1,
+      "id": 8,
+      "clockOut": "18:50:31",
+      "clockOutLocation": "Jl. Tanah Kusir II Blok Haji Leman No.55, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia"
+    },
+    {
+      "date": "2/7/2023",
+      "clockIn": "09:20:15",
+      "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
+      "UserId": 1,
+      "id": 7,
+      "clockOut": "19:34:31",
+      "clockOutLocation": "Jl. Tanah Kusir II Blok Haji Leman No.55, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia"
+    },
+    {
+      "date": "2/6/2023",
+      "clockIn": "09:30:15",
+      "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
+      "UserId": 1,
+      "id": 6,
+      "clockOut": "19:21:31",
+      "clockOutLocation": "Jl. Tanah Kusir II Blok Haji Leman No.55, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia"
+    },
+
+    {
+      "date": "2/3/2023",
+      "clockIn": "08:10:15",
+      "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
+      "UserId": 1,
+      "id": 3,
+      "clockOut": "17:49:31",
+      "clockOutLocation": "Jl. Tanah Kusir II Blok Haji Leman No.55, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia"
+    },
+    {
+      "date": "2/2/2023",
+      "clockIn": "09:05:15",
+      "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
+      "UserId": 1,
+      "id": 2,
+      "clockOut": "20:10:31",
+      "clockOutLocation": "Jl. Tanah Kusir II Blok Haji Leman No.55, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia"
+    },
+    {
+      "date": "2/1/2023",
+      "clockIn": "09:00:00",
+      "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
+      "UserId": 1,
+      "id": 1,
+      "clockOut": "18:00:00",
+      "clockOutLocation": "Jl. Tanah Kusir II Blok Haji Leman No.55, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia"
     }
   ]
 }
