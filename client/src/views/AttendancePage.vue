@@ -1,13 +1,15 @@
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onBeforeMount, onMounted } from "vue";
 import TopBar from "../components/TopBar.vue";
 import DragSlide from "../components/DragSlide.vue";
 import DigitalClock from "../components/DigitalClock.vue";
 import axios from "axios";
 const userId = localStorage.getItem("userId");
 
+//----------
+
 let userLocation = ref("");
-getLocation();
+// getLocation();
 
 function getLocation() {
   if (navigator.geolocation) {
@@ -28,7 +30,32 @@ async function reverseGeocode(lat, lng) {
     );
     // console.log(data);
     const address = data.results[0].formatted_address;
-    userLocation.value = address.split(",")[0];
+    userLocation.value = address;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//----------
+
+const todayAttendance = reactive({
+  id: "",
+  clockIn: "",
+  clockOut: "",
+});
+
+getTodayAttendanceRecord();
+
+async function getTodayAttendanceRecord() {
+  try {
+    const date = new Date();
+    const localeDate = date.toLocaleDateString();
+    const url = `http://localhost:3000/attendances?UserId=${userId}&date=${localeDate}`;
+
+    const { data } = await axios.get(url);
+    todayAttendance.id = data[0]?.id;
+    todayAttendance.clockIn = data[0]?.clockIn?.slice(0, -3);
+    todayAttendance.clockOut = data[0]?.clockOut?.slice(0, -3);
   } catch (error) {
     console.log(error);
   }
@@ -45,7 +72,7 @@ async function reverseGeocode(lat, lng) {
       <div class="text-sm">
         <div>
           <i class="bi bi-geo-alt-fill"></i>
-          {{ userLocation || "Loading your location" }}
+          {{ userLocation.split(",")[0] || "Loading your location" }}
           <i @click="getLocation" class="bi bi-arrow-clockwise"></i>
         </div>
       </div>
@@ -61,11 +88,15 @@ async function reverseGeocode(lat, lng) {
     >
       <div class="">
         <p class="text-xs pt-1.5">Clock-in</p>
-        <p class="text-2xl font-semibold mt-1">08:30</p>
+        <p class="text-2xl font-semibold mt-1">
+          {{ todayAttendance.clockIn || "--:--" }}
+        </p>
       </div>
       <div>
         <p class="text-xs pt-1.5">Clock-out</p>
-        <p class="text-2xl font-semibold mt-1">--:--</p>
+        <p class="text-2xl font-semibold mt-1">
+          {{ todayAttendance.clockOut || "--:--" }}
+        </p>
       </div>
       <div>
         <p class="text-xs pt-1.5">Working</p>
@@ -73,6 +104,11 @@ async function reverseGeocode(lat, lng) {
       </div>
     </div>
 
-    <DragSlide class="mt-4" />
+    <DragSlide
+      class="mt-4"
+      :todayAttendance="todayAttendance"
+      :userLocation="userLocation"
+      @refreshRecord="getTodayAttendanceRecord"
+    />
   </section>
 </template>

@@ -3,6 +3,7 @@
     {
       "id": 1,
       "name": "John Doe",
+      "profilePic": "",
       "email": "johndoe@mail.com",
       "password": "johndoe",
       "jobTitle": "Web Developer",
@@ -12,6 +13,7 @@
     {
       "id": 2,
       "name": "Johan Liebert",
+      "profilePic": "",
       "email": "johan@mail.com",
       "password": "johan",
       "jobTitle": "Product Designer",
@@ -24,8 +26,19 @@
       "id": 1,
       "date": "",
       "clockIn": "",
+      "clockInLocation": "",
+      "clockOutLocation": "",
       "clockOut": "",
       "UserId": 1
+    },
+    {
+      "date": "2/16/2023",
+      "clockIn": "12:37:43",
+      "clockInLocation": "Jl. Darma Putra Raya No.57, RT.9/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia",
+      "UserId": 1,
+      "id": 2,
+      "clockOut": "12:52:18",
+      "clockOutLocation": ""
     }
   ]
 }

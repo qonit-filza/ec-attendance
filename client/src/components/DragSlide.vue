@@ -1,18 +1,70 @@
 <script>
 import SlideUnlock from "vue-slide-unlock";
+import axios from "axios";
 
 export default {
   components: {
     SlideUnlock,
   },
+  props: ["todayAttendance", "userLocation"],
+  emits: ["refreshRecord"],
+  data() {
+    return {
+      isCompleted: this.todayAttendance.clockOut ? true : false,
+      slideText: "Slide to clock-in",
+      completeText: "Good luck for today!",
+    };
+  },
   methods: {
     complete() {
-      const date = new Date();
-      console.log(date);
-      setTimeout(() => {
-        this.$refs.vueslideunlock.reset();
-      }, 2000);
+      this.recordClockIn();
+      // console.log(this.userLocation);
     },
+
+    async recordClockIn() {
+      try {
+        const date = new Date();
+        const clockTime = date.toLocaleTimeString("en-GB");
+        const userId = localStorage.getItem("userId");
+
+        if (!this.todayAttendance.clockIn) {
+          await axios.post(`http://localhost:3000/attendances`, {
+            date: date.toLocaleDateString(),
+            clockIn: clockTime,
+            clockInLocation: this.userLocation,
+            UserId: +userId,
+          });
+
+          setTimeout(() => {
+            this.slideText = "Slide to clock-out";
+            this.$refs.vueslideunlock.reset();
+            this.completeText = "Thank you for your hard work!";
+          }, 2000);
+        } else {
+          console.log("tes");
+          console.log(this.todayAttendance.id);
+          await axios.patch(
+            `http://localhost:3000/attendances/${this.todayAttendance.id}`,
+            {
+              clockOut: clockTime,
+              clockOutLocation: this.userLocation,
+            }
+          );
+          this.isCompleted = true;
+        }
+
+        await this.$emit("refreshRecord");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+  created() {
+    setTimeout(() => {
+      if (this.todayAttendance.clockOut) {
+        this.isCompleted = true;
+      }
+    }, 500);
   },
 };
 </script>
@@ -23,12 +75,12 @@ export default {
     ref="vueslideunlock"
     :auto-width="true"
     :circle="true"
-    :disabled="false"
+    :disabled="isCompleted"
     :noanimate="false"
     :width="400"
     :height="50"
-    text="Slide to clock-in"
-    success-text="Good luck for today!"
+    :text="slideText"
+    :success-text="completeText"
     @completed="complete()"
   />
 </template>
