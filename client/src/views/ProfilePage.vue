@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import CustomButton from "../components/CustomButton.vue";
 import axios from "axios";
 import Swal from "sweetalert2";

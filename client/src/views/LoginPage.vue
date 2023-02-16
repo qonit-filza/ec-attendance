@@ -3,7 +3,7 @@ import IconEmail from "../components/icons/IconEmail.vue";
 import IconPassword from "../components/icons/IconPassword.vue";
 import CustomButton from "../components/CustomButton.vue";
 import { reactive } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import axios from "axios";
 const router = useRouter();

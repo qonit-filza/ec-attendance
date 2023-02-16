@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onBeforeMount, onMounted, computed } from "vue";
+import { ref, reactive, computed } from "vue";
 import TopBar from "../components/TopBar.vue";
 import DragSlide from "../components/DragSlide.vue";
 import DigitalClock from "../components/DigitalClock.vue";
@@ -10,7 +10,7 @@ const userId = localStorage.getItem("userId");
 
 let userLocation = ref("");
 // turn on later, turn to private repo when done
-// getLocation();
+getLocation();
 
 function getLocation() {
   if (navigator.geolocation) {
