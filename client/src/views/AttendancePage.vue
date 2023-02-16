@@ -1,8 +1,37 @@
 <script setup>
+import { ref } from "vue";
 import TopBar from "../components/TopBar.vue";
-import IconLocation from "../components/icons/IconLocation.vue";
 import DragSlide from "../components/DragSlide.vue";
 import DigitalClock from "../components/DigitalClock.vue";
+import axios from "axios";
+
+let userLocation = ref("");
+getLocation();
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser");
+  }
+}
+
+function showPosition(position) {
+  reverseGeocode(position.coords.latitude, position.coords.longitude);
+}
+
+async function reverseGeocode(lat, lng) {
+  try {
+    const { data } = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAPg76aHIrnNitFbc09wlV9BJxnN3yMow8`
+    );
+    // console.log(data);
+    const address = data.results[0].formatted_address;
+    userLocation.value = address.split(",")[0];
+  } catch (error) {
+    console.log(error);
+  }
+}
 </script>
 
 <template>
@@ -12,9 +41,12 @@ import DigitalClock from "../components/DigitalClock.vue";
     <div class="mt-24 text-center flex flex-col gap-2">
       <DigitalClock />
 
-      <div class="flex flex-row gap-1.5 mx-auto text-sm">
-        <IconLocation class="my-auto" />
-        <p>Electronic City SCBD</p>
+      <div class="text-sm">
+        <div>
+          <i class="bi bi-geo-alt-fill"></i>
+          {{ userLocation || "Loading your location" }}
+          <i @click="getLocation" class="bi bi-arrow-clockwise"></i>
+        </div>
       </div>
     </div>
 
