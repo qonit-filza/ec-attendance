@@ -2,6 +2,8 @@
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import CustomButton from "../components/CustomButton.vue";
+import CustomButtonGreen from "../components/CustomButtonGreen.vue";
+import CustomButtonRed from "../components/CustomButtonRed.vue";
 import axios from "axios";
 import Swal from "sweetalert2";
 const userId = localStorage.getItem("userId");
@@ -158,21 +160,19 @@ function handleLogout() {
       buttonText="Edit Profile"
     />
 
-    <CustomButton
+    <CustomButtonGreen
       v-else
       @click="handleEditProfile"
       class="mt-5"
       buttonType="button"
       buttonText="Save"
-      buttonColor="#16A34A"
     />
 
-    <CustomButton
+    <CustomButtonRed
       @click="handleLogout"
       class="mt-4"
       buttonType="button"
       buttonText="Log out"
-      buttonColor="#EB7878"
     />
   </section>
 </template>
