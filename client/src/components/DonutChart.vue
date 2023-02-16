@@ -1,34 +1,30 @@
-<script>
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+<script setup>
+import { computed, defineProps } from "vue";
+import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 import { Doughnut } from "vue-chartjs";
-
+const props = defineProps(["onTime", "late", "leaveEarly"]);
 ChartJS.register(ArcElement, Tooltip);
 
-export default {
-  components: {
-    Doughnut,
-  },
-  data() {
-    return {
-      data: {
-        labels: ["On-time", "Late", "Absent"],
-        datasets: [
-          {
-            backgroundColor: ["#41B883", "#f5c951", "#eb6d4d"],
-            data: [15, 3, 2],
-          },
-        ],
+const chartData = computed(() => {
+  return {
+    labels: ["On-time", "Late", "Leave Early"],
+    datasets: [
+      {
+        backgroundColor: ["#41B883", "#f5c951", "#eb6d4d"],
+        data: [props.onTime, props.late, props.leaveEarly],
       },
+    ],
+  };
+});
 
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-      },
-    };
-  },
-};
+const chartOptions = computed(() => {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
+});
 </script>
 
 <template>
-  <Doughnut :data="data" :options="options" />
+  <Doughnut :data="chartData" :options="chartOptions" />
 </template>

@@ -1,15 +1,59 @@
-<script setup>
-import TopBar from "../components/TopBar.vue";
+<script>
 import DonutChart from "../components/DonutChart.vue";
-import { ref, onMounted } from "vue";
 
-const data = ref("abcdefghijklmfasfdfn".split(""));
+import axios from "axios";
+const userId = localStorage.getItem("userId");
+
+export default {
+  components: {
+    DonutChart,
+  },
+  data() {
+    return {
+      attendanceList: [],
+      onTime: "",
+      late: "",
+      leaveEarly: "",
+    };
+  },
+  methods: {
+    async fetchAttendanceList() {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:3000/attendances?UserId=${userId}`
+        );
+        this.attendanceList = data;
+        this.onTime = data.filter(
+          (el) => el.clockIn < "09:01:00" && el.clockOut > "18:00:00"
+        ).length;
+        this.late = data.filter((el) => el.clockIn > "09:00:59").length;
+        this.leaveEarly = data.filter((el) => el.clockOut < "18:00:00").length;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    getDay(inputDate) {
+      const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+      const date = new Date(inputDate);
+      const dayName = days[date.getDay()];
+      return dayName;
+    },
+    strToMins(t) {
+      var s = t.split(":");
+      return Number(s[0]) * 60 + Number(s[1]);
+    },
+    minsToStr(t) {
+      return Math.trunc(t / 60) + ":" + ("00" + (t % 60)).slice(-2);
+    },
+  },
+  created() {
+    this.fetchAttendanceList();
+  },
+};
 </script>
 
 <template>
   <section class="flex flex-col justify-start gap-5 mb-20">
-    <TopBar />
-
     <div class="mt-5 text-center flex flex-row gap-2 mx-auto">
       <p>&larr;</p>
       <p>February</p>
@@ -21,26 +65,34 @@ const data = ref("abcdefghijklmfasfdfn".split(""));
         Summary
       </div>
 
-      <div class="bg-white rounded-b-xl flex flex-row text-gray-700 gap-2">
+      <div class="bg-white rounded-b-xl flex flex-row text-gray-700">
         <div class="w-1/2 h-40 p-5 pl-8">
-          <DonutChart class />
+          <DonutChart :onTime="onTime" :late="late" :leaveEarly="leaveEarly" />
         </div>
         <div class="w-1/2 my-auto text-sm">
+          <div class="flex flex-row text-center">
+            <p class="font-bold text-center w-12">
+              {{ Math.round((onTime / attendanceList.length) * 100) + "%" }}
+            </p>
+            <p class="">Punctuality</p>
+          </div>
           <div class="flex flex-row">
-            <p class="font-bold w-8 text-center">10</p>
+            <p class="font-bold w-12 text-center">
+              {{ onTime }}
+            </p>
             <p>On-time</p>
           </div>
           <div class="flex flex-row">
-            <p class="font-bold w-8 text-center">3</p>
+            <p class="font-bold w-12 text-center">
+              {{ late }}
+            </p>
             <p>Late</p>
           </div>
           <div class="flex flex-row">
-            <p class="font-bold w-8 text-center">2</p>
+            <p class="font-bold w-12 text-center">
+              {{ leaveEarly }}
+            </p>
             <p>Leave early</p>
-          </div>
-          <div class="flex flex-row">
-            <p class="font-bold w-8 text-center">1</p>
-            <p>Absent</p>
           </div>
         </div>
       </div>
@@ -62,29 +114,49 @@ const data = ref("abcdefghijklmfasfdfn".split(""));
 
         <!-- <div class="overflow-y-auto h-96"> -->
         <tbody class="text-gray-700 h-96">
-          <tr class="border-b-2 border-b-gray-100" v-for="row in data">
+          <tr
+            v-if="attendanceList.length"
+            class="border-b-2 border-b-gray-100"
+            v-for="attendance in attendanceList"
+            :key="attendance.id"
+          >
             <td class="p-3">
               <div
                 class="bg-gray-200 w-10 h-10 rounded-lg flex flex-col justify-center m-auto"
               >
-                <p class="m-auto font-semibold text-sm">01</p>
-                <p class="m-auto text-[0.7rem]">MON</p>
+                <p class="m-auto font-semibold text-sm">
+                  {{ attendance.date.split("/")[1] }}
+                </p>
+                <p class="m-auto text-[0.7rem]">
+                  {{ getDay(attendance.date) }}
+                </p>
               </div>
             </td>
             <td>
               <div class="flex flex-col text-center m-auto">
-                <p class="text-sm font-semibold">08:30</p>
-                <p class="text-[0.6rem]">Electronic City SCBD</p>
+                <p class="text-sm font-semibold">{{ attendance.clockIn }}</p>
+                <p class="text-[0.6rem]">
+                  {{ attendance.clockInLocation.split(",")[0] }}
+                </p>
               </div>
             </td>
             <td>
               <div class="flex flex-col text-center m-auto">
-                <p class="text-sm font-semibold">18:30</p>
-                <p class="text-[0.6rem]">Electronic City SCBD</p>
+                <p class="text-sm font-semibold">{{ attendance.clockOut }}</p>
+                <p class="text-[0.6rem]">
+                  {{ attendance.clockOutLocation.split(",")[0] }}
+                </p>
               </div>
             </td>
             <td>
-              <p class="m-auto text-center text-sm font-semibold">10:00</p>
+              <p class="m-auto text-center text-sm font-semibold">
+                {{
+                  minsToStr(
+                    strToMins(attendance.clockOut) -
+                      strToMins(attendance.clockIn)
+                  )
+                }}
+              </p>
             </td>
           </tr>
         </tbody>

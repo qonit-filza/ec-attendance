@@ -11,6 +11,7 @@ let isEditing = ref(false);
 const user = reactive({
   name: "",
   email: "",
+  profilePic: "",
   jobTitle: "",
   phone: "",
   address: "",
@@ -25,6 +26,7 @@ async function fetchUser() {
     user.jobTitle = data.jobTitle;
     user.phone = data.phone;
     user.address = data.address;
+    user.profilePic = data.profilePic;
   } catch (error) {
     console.log(error);
   }
@@ -67,7 +69,7 @@ function handleLogout() {
     >
       <img
         class="w-20 h-20 rounded-full absolute -top-10 left-1/2 -translate-x-1/2"
-        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+        :src="user.profilePic"
         alt="Rounded avatar"
       />
 
