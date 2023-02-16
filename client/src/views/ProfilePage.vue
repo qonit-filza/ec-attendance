@@ -1,8 +1,47 @@
 <script setup>
+import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import TopBar from "../components/TopBar.vue";
 import CustomButton from "../components/CustomButton.vue";
+import axios from "axios";
+const userId = localStorage.getItem("userId");
 const router = useRouter();
+
+let isEditing = ref(false);
+const user = reactive({
+  name: "",
+  email: "",
+  jobTitle: "",
+  phone: "",
+  address: "",
+});
+fetchUser();
+
+async function fetchUser() {
+  try {
+    const { data } = await axios.get(`http://localhost:3000/users/${userId}`);
+    user.name = data.name;
+    user.email = data.email;
+    user.jobTitle = data.jobTitle;
+    user.phone = data.phone;
+    user.address = data.address;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function toggleEdit() {
+  isEditing.value = !isEditing.value;
+}
+
+async function handleEditProfile() {
+  try {
+    await axios.patch(`http://localhost:3000/users/${userId}`, user);
+    await fetchUser();
+    toggleEdit();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 function handleLogout() {
   localStorage.clear();
@@ -12,10 +51,8 @@ function handleLogout() {
 
 <template>
   <section>
-    <TopBar />
-
     <div
-      class="bg-white text-gray-700 text-center py-2 rounded-lg mt-20 relative"
+      class="bg-white text-gray-700 text-center py-2 rounded-lg mt-20 relative h-[35rem] flex"
     >
       <img
         class="w-20 h-20 rounded-full absolute -top-10 left-1/2 -translate-x-1/2"
@@ -23,37 +60,99 @@ function handleLogout() {
         alt="Rounded avatar"
       />
 
-      <div class="mt-14 mb-8 flex flex-col gap-5">
+      <div class="m-auto flex flex-col gap-5 w-3/4">
         <div>
           <p class="text-md">Name</p>
-          <p class="text-xl font-semibold mt-1">John Doe</p>
+
+          <input
+            v-if="isEditing"
+            required
+            type="text"
+            name="name"
+            v-model="user.name"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 m-auto text-center"
+          />
+
+          <p v-else class="text-xl font-semibold mt-1">{{ user.name }}</p>
         </div>
 
         <div>
           <p class="text-md">Job Title</p>
-          <p class="text-xl font-semibold mt-1">Web Developer</p>
+          <input
+            v-if="isEditing"
+            required
+            type="text"
+            name="jobTitle"
+            v-model="user.jobTitle"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 m-auto text-center"
+          />
+
+          <p v-else class="text-xl font-semibold mt-1">{{ user.jobTitle }}</p>
         </div>
 
         <div>
           <p class="text-md">Email</p>
-          <p class="text-xl font-semibold mt-1">johndoe@mail.com</p>
+          <input
+            v-if="isEditing"
+            required
+            type="email"
+            name="email"
+            v-model="user.email"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 m-auto text-center"
+          />
+
+          <p v-else class="text-xl font-semibold mt-1">{{ user.email }}</p>
         </div>
 
         <div>
           <p class="text-md">Phone</p>
-          <p class="text-xl font-semibold mt-1">08123456789</p>
+          <input
+            v-if="isEditing"
+            required
+            type="number"
+            name="phone"
+            v-model="user.phone"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 m-auto text-center"
+          />
+
+          <p v-else class="text-xl font-semibold mt-1">{{ user.phone }}</p>
         </div>
 
         <div>
           <p class="text-md">Address</p>
-          <p class="text-xl font-semibold mt-1 w-full text-center px-14">
-            Jl Kebon Kacang no. 10, Jakarta Pusat
+
+          <input
+            v-if="isEditing"
+            required
+            type="text"
+            name="address"
+            v-model="user.address"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 m-auto text-center"
+          />
+
+          <p v-else class="text-xl font-semibold mt-1 w-full text-center px-14">
+            {{ user.address }}
           </p>
         </div>
       </div>
     </div>
 
-    <CustomButton class="mt-5" buttonType="button" buttonText="Edit Profile" />
+    <CustomButton
+      v-if="!isEditing"
+      @click="toggleEdit"
+      class="mt-5"
+      buttonType="button"
+      buttonText="Edit Profile"
+    />
+
+    <CustomButton
+      v-else
+      @click="handleEditProfile"
+      class="mt-5"
+      buttonType="button"
+      buttonText="Save"
+      buttonColor="#16A34A"
+    />
 
     <CustomButton
       @click="handleLogout"
