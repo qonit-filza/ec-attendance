@@ -1,6 +1,13 @@
 <script setup>
+import { useRouter, useRoute } from "vue-router";
 import TopBar from "../components/TopBar.vue";
 import CustomButton from "../components/CustomButton.vue";
+const router = useRouter();
+
+function handleLogout() {
+  localStorage.clear();
+  router.push("login");
+}
 </script>
 
 <template>
@@ -49,6 +56,7 @@ import CustomButton from "../components/CustomButton.vue";
     <CustomButton class="mt-5" buttonType="button" buttonText="Edit Profile" />
 
     <CustomButton
+      @click="handleLogout"
       class="mt-4"
       buttonType="button"
       buttonText="Log out"

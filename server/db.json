@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "johndoe@mail.com",
+      "password": "johndoe",
+      "jobTitle": "Web Developer",
+      "phone": "08123456789",
+      "address": "Jl. Kebon Kacang no. 10, Jakarta Pusat"
+    },
+    {
+      "id": 2,
+      "name": "Johan Liebert",
+      "email": "johan@mail.com",
+      "password": "johan",
+      "jobTitle": "Product Designer",
+      "phone": "082198765432",
+      "address": "Jl. Bendungan Hilir no. 7, Jakarta Selatan"
+    }
+  ],
+  "attendances": [
+    {
+      "id": 1,
+      "date": "",
+      "clockIn": "",
+      "clockOut": "",
+      "UserId": 1
+    }
+  ]
+}

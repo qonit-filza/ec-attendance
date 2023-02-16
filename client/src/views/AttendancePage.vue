@@ -1,9 +1,10 @@
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import TopBar from "../components/TopBar.vue";
 import DragSlide from "../components/DragSlide.vue";
 import DigitalClock from "../components/DigitalClock.vue";
 import axios from "axios";
+const userId = localStorage.getItem("userId");
 
 let userLocation = ref("");
 getLocation();
