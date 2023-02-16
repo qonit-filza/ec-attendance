@@ -4,8 +4,10 @@ import IconPassword from "../components/icons/IconPassword.vue";
 import CustomButton from "../components/CustomButton.vue";
 import { reactive } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useToast } from "vue-toastification";
 import axios from "axios";
 const router = useRouter();
+const toast = useToast();
 
 const formVal = reactive({
   email: "",
@@ -29,7 +31,8 @@ async function handleLogin() {
     localStorage.setItem("userId", data[0].id);
     router.push({ path: "/" });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    toast.warning(error.message);
   }
 }
 </script>
