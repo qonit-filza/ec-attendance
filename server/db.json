@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "John Doe",
-      "profilePic": "",
+      "profilePic": "https://flowbite.com/docs/images/people/profile-picture-2.jpg",
       "email": "johndoe@mail.com",
       "password": "johndoe",
       "jobTitle": "Web Developer",
@@ -13,7 +13,7 @@
     {
       "id": 2,
       "name": "Johan Liebert",
-      "profilePic": "",
+      "profilePic": "https://flowbite.com/docs/images/people/profile-picture-5.jpg",
       "email": "johan@mail.com",
       "password": "johan",
       "jobTitle": "Product Designer",
