@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onBeforeMount, onMounted } from "vue";
+import { ref, reactive, onBeforeMount, onMounted, computed } from "vue";
 import TopBar from "../components/TopBar.vue";
 import DragSlide from "../components/DragSlide.vue";
 import DigitalClock from "../components/DigitalClock.vue";
@@ -9,6 +9,7 @@ const userId = localStorage.getItem("userId");
 //----------
 
 let userLocation = ref("");
+// turn on later, turn to private repo when done
 // getLocation();
 
 function getLocation() {
@@ -43,7 +44,6 @@ const todayAttendance = reactive({
   clockIn: "",
   clockOut: "",
 });
-
 getTodayAttendanceRecord();
 
 async function getTodayAttendanceRecord() {
@@ -54,11 +54,39 @@ async function getTodayAttendanceRecord() {
 
     const { data } = await axios.get(url);
     todayAttendance.id = data[0]?.id;
-    todayAttendance.clockIn = data[0]?.clockIn?.slice(0, -3);
+    todayAttendance.clockIn = data[0]?.clockIn.slice(0, -3);
     todayAttendance.clockOut = data[0]?.clockOut?.slice(0, -3);
   } catch (error) {
     console.log(error);
   }
+}
+
+//-----------
+
+const workingTime = computed(() => {
+  const date = new Date();
+  const currentTime = date.toLocaleTimeString("en-GB").slice(0, -3);
+  const clockInTime = todayAttendance.clockIn;
+  const clockOutTime = todayAttendance.clockOut;
+
+  if (!clockInTime) {
+    return "--:--";
+  } else {
+    if (clockOutTime) {
+      return minsToStr(strToMins(clockOutTime) - strToMins(clockInTime));
+    } else {
+      return minsToStr(strToMins(currentTime) - strToMins(clockInTime));
+    }
+  }
+});
+
+function strToMins(t) {
+  var s = t.split(":");
+  return Number(s[0]) * 60 + Number(s[1]);
+}
+
+function minsToStr(t) {
+  return Math.trunc(t / 60) + ":" + ("00" + (t % 60)).slice(-2);
 }
 </script>
 
@@ -100,15 +128,24 @@ async function getTodayAttendanceRecord() {
       </div>
       <div>
         <p class="text-xs pt-1.5">Working</p>
-        <p class="text-2xl font-semibold mt-1">00:30</p>
+        <p class="text-2xl font-semibold mt-1">
+          {{ workingTime }}
+        </p>
       </div>
     </div>
 
     <DragSlide
+      v-if="!todayAttendance.clockOut"
       class="mt-4"
       :todayAttendance="todayAttendance"
       :userLocation="userLocation"
       @refreshRecord="getTodayAttendanceRecord"
     />
+    <div
+      v-else
+      class="w-full bg-green-600 text-center mt-4 p-4 rounded-full border-white border-4"
+    >
+      Thank you for your hard work!
+    </div>
   </section>
 </template>

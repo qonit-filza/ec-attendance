@@ -10,18 +10,12 @@ export default {
   emits: ["refreshRecord"],
   data() {
     return {
-      isCompleted: this.todayAttendance.clockOut ? true : false,
       slideText: "Slide to clock-in",
       completeText: "Good luck for today!",
     };
   },
   methods: {
-    complete() {
-      this.recordClockIn();
-      // console.log(this.userLocation);
-    },
-
-    async recordClockIn() {
+    async complete() {
       try {
         const date = new Date();
         const clockTime = date.toLocaleTimeString("en-GB");
@@ -41,8 +35,6 @@ export default {
             this.completeText = "Thank you for your hard work!";
           }, 2000);
         } else {
-          console.log("tes");
-          console.log(this.todayAttendance.id);
           await axios.patch(
             `http://localhost:3000/attendances/${this.todayAttendance.id}`,
             {
@@ -50,7 +42,6 @@ export default {
               clockOutLocation: this.userLocation,
             }
           );
-          this.isCompleted = true;
         }
 
         await this.$emit("refreshRecord");
@@ -61,8 +52,9 @@ export default {
   },
   created() {
     setTimeout(() => {
-      if (this.todayAttendance.clockOut) {
-        this.isCompleted = true;
+      if (this.todayAttendance.clockIn) {
+        this.slideText = "Slide to clock-out";
+        this.completeText = "Thank you for your hard work!";
       }
     }, 500);
   },
@@ -75,7 +67,7 @@ export default {
     ref="vueslideunlock"
     :auto-width="true"
     :circle="true"
-    :disabled="isCompleted"
+    :disabled="false"
     :noanimate="false"
     :width="400"
     :height="50"
